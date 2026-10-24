@@ -1,6 +1,7 @@
 (function () {
   var root = document.documentElement;
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var mqRM = matchMedia("(prefers-reduced-motion: reduce)");
+  function motionOn() { var v = root.getAttribute("data-motion"); return v === "on" || (v !== "off" && !mqRM.matches); }
   var copy = {
     en: { t: "Sergio Atanacio · AI & Data Engineer", d: "Junior AI & Data Engineer in Lima, Peru, open to remote roles worldwide. Case studies of production systems: an LLM agent with tool calling and evals, verified data, a role-based platform, a full-stack monitor and a coding-agent workflow.", open: "Open", close: "Close", copied: "Copied" },
     es: { t: "Sergio Atanacio · Ingeniero de IA y datos", d: "Ingeniero junior de IA y datos en Lima, Perú, abierto a roles remotos internacionales. Casos de estudio de sistemas en producción: agente LLM con tool calling y evals, datos verificados, plataforma con roles, monitor full-stack y flujo con agentes de código.", open: "Abrir", close: "Cerrar", copied: "Copiado" }
@@ -17,13 +18,37 @@
     var m = document.querySelector('meta[name="description"]'); if (m) m.content = copy[l].d;
     var cv = document.getElementById("cv-link"); if (cv) cv.href = cv.dataset[l];
     document.querySelectorAll("[data-case]").forEach(function (c) { labelToggle(c); });
+    if (typeof updateMotion === "function") updateMotion();
     if (user) {
       try { localStorage.setItem("lang", l); } catch (e) {}
-      if (!reduce) { main.classList.remove("swap"); void main.offsetWidth; main.classList.add("swap"); }
+      if (motionOn()) { main.classList.remove("swap"); void main.offsetWidth; main.classList.add("swap"); }
     }
   }
   var saved = null; try { saved = localStorage.getItem("lang"); } catch (e) {}
   document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set, true); }); });
+
+  /* ---- animations switch: follows the system setting, but the person can override it ---- */
+  var mbtn = document.getElementById("motion-btn");
+  var mtxt = { en: { on: "Animations: on", off: "Animations: off", sys: "Animations: off (system)", son: "Anim: on", soff: "Anim: off", t: "Turn animations on or off" },
+               es: { on: "Animaciones: activadas", off: "Animaciones: desactivadas", sys: "Animaciones: desactivadas (sistema)", son: "Anim: sí", soff: "Anim: no", t: "Activar o desactivar las animaciones" } };
+  function updateMotion() {
+    if (!mbtn) return;
+    var on = motionOn(), sys = !on && mqRM.matches && root.getAttribute("data-motion") !== "off", T = mtxt[lang] || mtxt.en;
+    var long = on ? T.on : sys ? T.sys : T.off;
+    mbtn.setAttribute("aria-pressed", String(on));
+    mbtn.setAttribute("aria-label", long + ". " + T.t);
+    mbtn.title = T.t;
+    mbtn.querySelector(".mt-l").textContent = long;
+    mbtn.querySelector(".mt-s").textContent = on ? T.son : T.soff;
+  }
+  if (mbtn) mbtn.addEventListener("click", function () {
+    var next = motionOn() ? "off" : "on";
+    root.setAttribute("data-motion", next);
+    try { localStorage.setItem("motion", next); } catch (e) {}
+    updateMotion();
+    window.dispatchEvent(new Event("motionchange"));
+  });
+  if (mqRM.addEventListener) mqRM.addEventListener("change", function () { updateMotion(); window.dispatchEvent(new Event("motionchange")); });
 
   /* ---- theme ---- */
   var mq = matchMedia("(prefers-color-scheme: dark)");
@@ -64,10 +89,11 @@
     var c = id && document.getElementById(id);
     if (c && c.hasAttribute("data-case")) {
       setOpen(c, true);
-      if (scroll) setTimeout(function () { c.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }, 60);
+      if (scroll) setTimeout(function () { c.scrollIntoView({ behavior: motionOn() ? "smooth" : "auto", block: "start" }); }, 60);
     }
   }
   window.addEventListener("hashchange", function () { openFromHash(true); });
+  updateMotion();
   setLang(saved === "es" || saved === "en" ? saved : ((navigator.language || "").slice(0, 2) === "es" ? "es" : "en"), false);
   if (location.hash && document.getElementById(location.hash.slice(1)) && document.getElementById(location.hash.slice(1)).hasAttribute("data-case")) openFromHash(true);
   else if (cases[0]) setOpen(cases[0], true);
@@ -92,7 +118,7 @@
     });
   }, { rootMargin: "-30% 0px -60% 0px" });
   document.querySelectorAll("main section[id]").forEach(function (s) { if (links[s.id]) spy.observe(s); });
-  if (reduce) return;
+  if (!motionOn()) return;
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { rootMargin: "0px 0px -10% 0px" });

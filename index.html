@@ -21,6 +21,8 @@
 <link rel="sitemap" type="application/xml" href="sitemap.xml">
 <script>
 (function(){var r=document.documentElement,t=null;r.classList.add("js");try{t=localStorage.getItem("theme")}catch(e){}
+var mo=null;try{mo=localStorage.getItem("motion")}catch(e){}
+if(mo==="on"||mo==="off")r.setAttribute("data-motion",mo);
 if(t==="light"||t==="dark")r.setAttribute("data-theme",t);
 r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));})();
 </script>
@@ -63,6 +65,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
       <span class="to-dark"><span class="en">Dark</span><span class="es">Oscuro</span></span>
       <span class="to-light"><span class="en">Light</span><span class="es">Claro</span></span>
     </button>
+    <button type="button" class="seg-one motion" id="motion-btn" aria-pressed="true"><span class="mt-l"></span><span class="mt-s"></span></button>
   </div>
 </header>
 

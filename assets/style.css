@@ -51,8 +51,9 @@ html[data-lang="en"] .es,html[data-lang="es"] .en{display:none}
 .brand-role{display:none}
 .nav ul{list-style:none;padding:0;display:flex;gap:.2rem;justify-content:space-between;overflow-x:auto;scrollbar-width:none}
 .nav ul::-webkit-scrollbar{display:none}
-.nav a{display:block;padding:.6rem .55rem;font:500 .8rem var(--font-mono);color:var(--muted);border-radius:var(--radius);white-space:nowrap;transition:color var(--dur-fast),background-color var(--dur-fast)}
-.nav a:hover{color:var(--text);background:var(--surface-2)}
+.nav a{display:block;padding:.6rem .55rem;font:500 .8rem var(--font-mono);color:var(--muted);border-radius:var(--radius);white-space:nowrap}
+/* the active state changes while scrolling, so it changes at once; only the hover eases (transitions fired from the scroll spy stalled frame pacing in Chromium) */
+.nav a:hover{color:var(--text);background:var(--surface-2);transition:color var(--dur-fast),background-color var(--dur-fast)}
 .nav a[aria-current]{color:var(--text);background:var(--surface-2)}
 .ctl{display:flex;gap:.4rem;align-items:center}
 .seg{display:flex;background:var(--surface-2);border-radius:var(--radius);padding:2px}
@@ -75,7 +76,7 @@ html[data-eff="light"] .theme .to-dark,html[data-eff="dark"] .theme .to-light{di
   .brand-role{display:block;font:400 .78rem var(--font-mono);color:var(--muted);margin-top:.5rem}
   .nav ul{flex-direction:column;gap:.1rem;overflow:visible}
   .nav a{font-size:.85rem;padding:.55rem .75rem;margin-left:-.75rem;display:flex;align-items:center;gap:.6rem}
-  .nav a::before{content:"";width:.35rem;height:.35rem;background:transparent;transition:background-color var(--dur-fast),transform var(--dur-fast) var(--ease);transform:scale(.4)}
+  .nav a::before{content:"";width:.35rem;height:.35rem;background:transparent;transform:scale(.4)}
   .nav a[aria-current]::before{background:var(--accent);transform:none}
   .ctl{margin-top:auto}
 }
@@ -202,9 +203,11 @@ h2{font:500 clamp(1.6rem,3.2vw,2.25rem)/1.15 var(--font-body);letter-spacing:-.0
 .js .case.open .case-body{opacity:1;transition:opacity .4s var(--ease) .12s}
 
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{transition:none!important;animation:none!important}
+  html:not([data-motion="on"]){scroll-behavior:auto}
+  html:not([data-motion="on"]) *,html:not([data-motion="on"]) *::before,html:not([data-motion="on"]) *::after{transition:none!important;animation:none!important}
 }
+html[data-motion="off"]{scroll-behavior:auto}
+html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{transition:none!important;animation:none!important}
 @media print{.side{position:static}.js .case-panel{grid-template-rows:1fr;visibility:visible}.js .case-body{opacity:1}}
 
 /* ---------- hero canvas, AI/Data pair, kinds ---------- */
@@ -239,9 +242,30 @@ h2{font:500 clamp(1.6rem,3.2vw,2.25rem)/1.15 var(--font-body);letter-spacing:-.0
 .js .intro>.vis{margin:var(--s3) 0 0;height:9rem}
 .vis-box{position:absolute;inset:0}
 .vis-static{position:absolute;inset:0;width:100%;height:100%;display:block}
-@media (min-width:87.5rem){
+/* 64rem to 80rem: the hero keeps an in-flow band under the title; every other section gets a strip that stays pinned while the section is on screen */
+@media (min-width:64rem){
+  .js .intro>.vis{height:11rem}
+  .js .block>.vis{position:sticky;top:0;z-index:3;height:10rem;margin:0 0 var(--s3);background:var(--bg)}
+  .js .tone>.vis{background:var(--surface)}
+}
+/* 80rem and up: the formation lives in a rail at the right, pinned to the middle of the screen */
+@media (min-width:80rem){
   :root{--measure:42rem}
-  .js .vis{position:absolute;top:0;bottom:0;right:.5rem;left:calc(var(--gut) + var(--measure) + 1rem);height:auto;margin:0;max-width:none}
-  .js .intro>.vis{margin:0}
+  .js .vis,.js .block>.vis,.js .intro>.vis{position:absolute;top:0;bottom:0;right:.5rem;left:auto;width:max(16rem,calc(100% - var(--gut) - var(--measure) - 1rem));height:auto;margin:0;max-width:none;background:none;z-index:auto}
   .vis-box{position:sticky;top:calc(50vh - 12rem);bottom:auto;left:0;right:0;height:24rem}
 }
+
+/* ---------- animations switch ---------- */
+.motion{display:none}
+.js .motion{display:inline-block}
+.motion .mt-s{display:none}
+.motion[aria-pressed="true"]{color:var(--text)}
+.ctl{flex-wrap:wrap}
+@media (max-width:63.99rem){
+  .motion .mt-l{display:none}
+  .motion .mt-s{display:inline}
+  .ctl{flex-wrap:nowrap;gap:.3rem}
+  .seg button,.seg-one{padding:.5rem .5rem;min-width:2.25rem;font-size:.7rem}
+  .brand{font-size:.95rem}
+}
+@media (max-width:25rem){ .brand{font-size:.88rem} .seg button,.seg-one{padding:.5rem .42rem;min-width:2rem} }
