@@ -165,7 +165,7 @@ h2{font:500 clamp(1.6rem,3.2vw,2.25rem)/1.15 var(--font-body);letter-spacing:-.0
 .tags{font:400 .82rem var(--font-mono);color:var(--accent);margin:.5rem 0 var(--s2)}
 .pub:nth-child(1) p:last-of-type{max-width:40rem}
 .more{display:inline-block;margin-top:var(--s2);color:var(--accent);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:.35em;transition:text-decoration-color var(--dur-fast)}
-.more::after{content:" \2192";display:inline-block;transition:transform var(--dur-fast) var(--ease)}
+.more::after{content:"\2192";margin-left:.45em;display:inline-block;transition:transform var(--dur-fast) var(--ease)}
 .more:hover{text-decoration-color:var(--accent)}
 .more:hover::after{transform:translateX(3px)}
 
@@ -306,7 +306,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--surface-3) transparent}
 
 /* buttons: pressed feedback */
 .btn:active{transform:translateY(1px)}
-.btn.primary::after{content:" \2192";display:inline-block;transition:transform var(--dur-fast) var(--ease)}
+.btn.primary::after{content:"\2192";margin-left:.45em;display:inline-block;transition:transform var(--dur-fast) var(--ease)}
 .btn.primary:hover::after{transform:translateX(3px)}
 
 /* jobs and skills: quiet timeline rule */
