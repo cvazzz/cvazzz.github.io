@@ -269,3 +269,46 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
   .brand{font-size:.95rem}
 }
 @media (max-width:25rem){ .brand{font-size:.88rem} .seg button,.seg-one{padding:.5rem .42rem;min-width:2rem} }
+
+/* ---------- polish: compositor-only effects, nothing here depends on scroll handlers ---------- */
+h1,h2,h3,.ttl{text-wrap:balance}
+p,dd,.ctx{text-wrap:pretty}
+::selection{background:var(--accent);color:var(--on-accent)}
+html{scrollbar-width:thin;scrollbar-color:var(--surface-3) transparent}
+.when,.num,.mono{font-variant-numeric:tabular-nums}
+
+/* reading progress: a 2px line driven by the browser's scroll timeline (no JS; ignored where unsupported) */
+.progress{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;z-index:60;pointer-events:none}
+@supports (animation-timeline:scroll()){
+  @keyframes grow{to{transform:scaleX(1)}}
+  .progress{animation:grow linear both;animation-timeline:scroll(root block)}
+}
+
+/* hero status dot */
+.kicker{display:flex;align-items:center;gap:.6rem}
+.kicker::before{content:"";flex:none;width:.5rem;height:.5rem;border-radius:50%;background:var(--ok);animation:ping 2.8s var(--ease) infinite}
+@keyframes ping{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* case rows: an accent bar grows on hover and while open */
+.case{position:relative}
+.case::before{content:"";position:absolute;left:0;top:.9rem;bottom:.9rem;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:50% 0;transition:transform .35s var(--ease)}
+.case:hover::before,.case.open::before,.case:focus-within::before{transform:scaleY(1)}
+.case-toggle .act::after{content:"";display:inline-block;width:.45rem;height:.45rem;margin-left:.5rem;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-.15em) rotate(45deg);transition:transform .35s var(--ease)}
+.case.open .case-toggle .act::after{transform:translateY(.05em) rotate(-135deg)}
+
+/* public projects as cards */
+.pubs{gap:var(--s3)}
+.pub{background:var(--surface);padding:1.5rem 1.5rem 1.6rem;border-radius:4px;position:relative;transition:transform .35s var(--ease),background-color .35s var(--ease)}
+.tone .pub{background:var(--bg)}
+.pub::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:50% 0;transition:transform .35s var(--ease)}
+.pub:hover,.pub:focus-within{transform:translateY(-2px)}
+.pub:hover::before,.pub:focus-within::before{transform:scaleY(1)}
+
+/* buttons: pressed feedback */
+.btn:active{transform:translateY(1px)}
+.btn.primary::after{content:" \2192";display:inline-block;transition:transform var(--dur-fast) var(--ease)}
+.btn.primary:hover::after{transform:translateX(3px)}
+
+/* jobs and skills: quiet timeline rule */
+.job{position:relative;padding-left:1.25rem;border-left:1px solid var(--surface-3)}
+.job::before{content:"";position:absolute;left:-.2rem;top:.6rem;width:.4rem;height:.4rem;background:var(--accent)}
