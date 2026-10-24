@@ -208,8 +208,8 @@ h2{font:500 clamp(1.6rem,3.2vw,2.25rem)/1.15 var(--font-body);letter-spacing:-.0
 @media print{.side{position:static}.js .case-panel{grid-template-rows:1fr;visibility:visible}.js .case-body{opacity:1}}
 
 /* ---------- hero canvas, AI/Data pair, kinds ---------- */
-.intro{position:relative;isolation:isolate;overflow:hidden}
-.cubes{position:absolute;inset:0;width:100%;max-width:none;height:100%;z-index:-1;pointer-events:none;display:block}
+.intro,.block{position:relative}
+.cubes{position:fixed;left:0;top:0;width:100%;height:100vh;z-index:8;pointer-events:none;display:block}
 .mk{display:inline-block;width:.5rem;height:.5rem;margin-right:.55rem;vertical-align:.05em;flex:none}
 .mk.ai{background:var(--accent)}
 .mk.data{background:var(--ok)}
@@ -232,5 +232,16 @@ h2{font:500 clamp(1.6rem,3.2vw,2.25rem)/1.15 var(--font-body);letter-spacing:-.0
 .skill-rest{display:grid;gap:var(--s3)}
 .skill-rest dt{font:500 .72rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
 .skill-rest dd{margin:0;max-width:40rem}
-/* room under the hero text for the cube band when the free side is too narrow */
-@media (max-width:87.5rem){.intro{padding-bottom:14rem}}
+
+/* ---------- section formations: placeholders reserve space, so nothing shifts ---------- */
+.vis{display:none}
+.js .vis{display:block;position:relative;height:12rem;margin:0 0 var(--s3);max-width:var(--measure)}
+.js .intro>.vis{margin:var(--s3) 0 0;height:9rem}
+.vis-box{position:absolute;inset:0}
+.vis-static{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media (min-width:87.5rem){
+  :root{--measure:42rem}
+  .js .vis{position:absolute;top:0;bottom:0;right:.5rem;left:calc(var(--gut) + var(--measure) + 1rem);height:auto;margin:0;max-width:none}
+  .js .intro>.vis{margin:0}
+  .vis-box{position:sticky;top:calc(50vh - 12rem);bottom:auto;left:0;right:0;height:24rem}
+}

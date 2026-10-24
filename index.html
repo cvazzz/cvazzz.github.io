@@ -68,11 +68,11 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
 
 <main id="main" class="stage">
   <section class="intro" id="top" aria-labelledby="h-intro">
-    <canvas class="cubes" id="cubes" aria-hidden="true"></canvas>
     <p class="mono kicker reveal"><span class="en">Lima, Peru · remote, worldwide</span><span class="es">Lima, Perú · remoto, internacional</span></p>
     <h1 id="h-intro" class="reveal"><span class="h1-name">Sergio Atanacio · AI &amp; Data Engineer</span>
       <span class="en">I build AI systems and data systems, and check that both are right.</span>
       <span class="es">Construyo sistemas de IA y sistemas de datos, y compruebo que ambos son correctos.</span></h1>
+    <div class="vis" data-scene="hero" aria-hidden="true"><div class="vis-box"></div></div>
     <p class="lead reveal">
       <span class="en">Junior engineer with the same weight on both sides. Systems Engineering student at UPC (evening classes) and, since January 2026, AI &amp; Data Systems Engineer at BaldeCash, where I am the main developer of the systems described below. Looking for a junior role in AI, data, automation or software.</span>
       <span class="es">Ingeniero junior con el mismo peso en ambos lados. Estudiante de Ingeniería de Sistemas en la UPC (clases en la noche) y, desde enero de 2026, AI &amp; Data Systems Engineer en BaldeCash, donde soy el desarrollador principal de los sistemas descritos abajo. Busco un rol junior en IA, datos, automatización o software.</span>
@@ -97,6 +97,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
         <span class="es">Cinco sistemas que construí en BaldeCash como desarrollador principal, funcionando con usuarios reales. Se describen solo a nivel de ingeniería: sin datos del negocio. Abre uno para leer el problema, las decisiones y sus costos, y qué haría distinto.</span>
       </p>
     </header>
+    <div class="vis" data-scene="pipeline" aria-hidden="true"><div class="vis-box"></div></div>
     <div class="cases">
 <article class="case reveal" id="case-agent" data-case>
 <h3><button type="button" class="case-toggle" id="b-agent" aria-expanded="false" aria-controls="p-agent"><span class="num">01</span><span class="ttl"><span class="en">A chat agent that calls tools, streams, and fails gracefully</span><span class="es">Un agente de chat que llama herramientas, hace streaming y falla con elegancia</span><span class="ctx"><span class="en">An assistant inside an internal dashboard, for internal users.</span><span class="es">Un asistente dentro de un dashboard interno, para usuarios internos.</span></span><span class="kinds"><span class="kind"><span class="mk ai"></span><span class="en">AI</span><span class="es">IA</span></span><span class="kind"><span class="mk data"></span><span class="en">Data</span><span class="es">Datos</span></span></span></span><span class="act" aria-hidden="true"><span class="en">Open</span><span class="es">Abrir</span></span></button></h3>
@@ -173,6 +174,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
         <span class="es">No son extractos de trabajo de la empresa. Los escribí para mostrar los mismos métodos en público, con datos ficticios o generados, de modo que se pueda leer el código.</span>
       </p>
     </header>
+    <div class="vis" data-scene="git" aria-hidden="true"><div class="vis-box"></div></div>
     <div class="pubs">
 <article class="pub reveal"><h3>llm-agent-evals</h3><span class="kinds"><span class="kind"><span class="mk ai"></span><span class="en">AI</span><span class="es">IA</span></span></span><p class="tags">TypeScript · Node.js · SQLite</p><p><span class="en">A tool-calling LLM agent with NDJSON streaming, a capped multi-turn tool loop, response cache, per-user memory, daily usage limit and model fallback, plus a rescue parser for tool calls emitted as plain text. An evaluation harness compares prompt versions. It runs offline with a deterministic mock provider and works with any OpenAI-compatible endpoint.</span><span class="es">Un agente LLM con tool calling, streaming NDJSON, bucle de herramientas multi-turno acotado, caché de respuestas, memoria por usuario, límite diario de uso y modelo de respaldo, más un parser de rescate para llamadas emitidas como texto. Un arnés de evaluación compara versiones del prompt. Funciona sin conexión con un proveedor mock determinista y con cualquier endpoint compatible con OpenAI.</span></p><a class="more" href="https://github.com/cvazzz/llm-agent-evals" rel="noopener"><span class="en">View on GitHub</span><span class="es">Ver en GitHub</span><span class="sr"> llm-agent-evals</span></a></article>
 <article class="pub reveal"><h3>reproducible-data-pipeline</h3><span class="kinds"><span class="kind"><span class="mk data"></span><span class="en">Data</span><span class="es">Datos</span></span></span><p class="tags">Python · SQLite</p><p><span class="en">A six-step batch pipeline (extract, clean, validate, load, metrics, report) over a seeded synthetic retail dataset, so every run gives the same result. Data quality rules live in a config file, and the generator plants known defects to check that validation catches them. Tests included.</span><span class="es">Un pipeline por lotes de seis pasos (extraer, limpiar, validar, cargar, métricas, reporte) sobre un dataset sintético de retail con semilla fija, de modo que cada ejecución da el mismo resultado. Las reglas de calidad viven en un archivo de configuración y el generador introduce defectos conocidos para comprobar que la validación los detecta. Incluye tests.</span></p><a class="more" href="https://github.com/cvazzz/reproducible-data-pipeline" rel="noopener"><span class="en">View on GitHub</span><span class="es">Ver en GitHub</span><span class="sr"> reproducible-data-pipeline</span></a></article>
@@ -185,6 +187,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
       <p class="mono sec-tag"><span class="en">03 · timeline</span><span class="es">03 · trayectoria</span></p>
       <h2 id="h-exp"><span class="en">Work</span><span class="es">Trabajo</span></h2>
     </header>
+    <div class="vis" data-scene="timeline" aria-hidden="true"><div class="vis-box"></div></div>
     <div class="jobs">
 
 <article class="job reveal"><header><h3>BaldeCash</h3><p class="when">2026 – <span class="en">present</span><span class="es">presente</span></p></header>
@@ -208,6 +211,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
       <p class="mono sec-tag">04 · stack</p>
       <h2 id="h-skills">Skills</h2>
     </header>
+    <div class="vis" data-scene="skills" aria-hidden="true"><div class="vis-box"></div></div>
     <div class="skills reveal">
       <div class="skill-main">
         <section aria-labelledby="sk-ai"><h3 id="sk-ai"><span class="mk ai"></span><span class="en">AI systems</span><span class="es">Sistemas de IA</span></h3><p>Tool calling, NDJSON streaming, prompt design, evals (golden sets), model fallback, agent memory, Claude Code and subagents, OpenAI and Grok APIs, TensorFlow, PyTorch and Keras (coursework).</p></section>
@@ -227,6 +231,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
       <h2 id="h-contact"><span class="en">Contact</span><span class="es">Contacto</span></h2>
       <p class="sec-note"><span class="en">Open to remote junior roles. Email is the fastest way.</span><span class="es">Abierto a roles junior remotos. El correo es la vía más rápida.</span></p>
     </header>
+    <div class="vis" data-scene="contact" aria-hidden="true"><div class="vis-box"></div></div>
     <ul class="contact reveal">
       <li><a href="mailto:cvaz656@gmail.com">cvaz656@gmail.com</a>
         <button type="button" class="copy" id="copy-btn" data-addr="cvaz656@gmail.com"><span class="en">Copy</span><span class="es">Copiar</span></button>
@@ -239,6 +244,7 @@ r.setAttribute("data-eff",t||(matchMedia("(prefers-color-scheme: dark)").matches
   <footer class="foot"><p>© 2026 Sergio Atanacio</p></footer>
 </main>
 </div>
+<canvas class="cubes" id="cubes" aria-hidden="true"></canvas>
 <script src="assets/main.js" defer></script>
 <script src="assets/cubes.js" defer></script>
 </body>
