@@ -206,3 +206,31 @@ h2{font:500 clamp(1.6rem,3.2vw,2.25rem)/1.15 var(--font-body);letter-spacing:-.0
   *,*::before,*::after{transition:none!important;animation:none!important}
 }
 @media print{.side{position:static}.js .case-panel{grid-template-rows:1fr;visibility:visible}.js .case-body{opacity:1}}
+
+/* ---------- hero canvas, AI/Data pair, kinds ---------- */
+.intro{position:relative;isolation:isolate;overflow:hidden}
+.cubes{position:absolute;inset:0;width:100%;max-width:none;height:100%;z-index:-1;pointer-events:none;display:block}
+.mk{display:inline-block;width:.5rem;height:.5rem;margin-right:.55rem;vertical-align:.05em;flex:none}
+.mk.ai{background:var(--accent)}
+.mk.data{background:var(--ok)}
+.pair{display:grid;gap:var(--s2) var(--s4);margin-top:var(--s4);max-width:40rem}
+.pair dt{font:500 .72rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.pair dd{margin:0;font-size:.98rem;line-height:1.55}
+@media (min-width:44rem){.pair{grid-template-columns:1fr 1fr}}
+.kinds{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.kind{display:inline-flex;align-items:center;font:500 .7rem/1 var(--font-mono);letter-spacing:.04em;background:var(--surface-2);color:var(--text);padding:.38rem .6rem;border-radius:var(--radius)}
+.case.open .kind,.case-toggle:hover .kind{background:var(--surface-3)}
+.kind .mk{margin-right:.45rem}
+.pub .kinds{margin:.7rem 0 0}
+.tone .kind{background:var(--surface-3)}
+.skills{display:grid;gap:var(--s4);max-width:var(--measure)}
+.skill-main{display:grid;gap:var(--s3) var(--s4)}
+@media (min-width:44rem){.skill-main{grid-template-columns:1fr 1fr}}
+.skill-main h3{font:500 1.25rem var(--font-body);margin-bottom:.45rem;display:flex;align-items:center}
+.skill-main h3 .mk{width:.6rem;height:.6rem}
+.skill-main p{max-width:30rem}
+.skill-rest{display:grid;gap:var(--s3)}
+.skill-rest dt{font:500 .72rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.skill-rest dd{margin:0;max-width:40rem}
+/* room under the hero text for the cube band when the free side is too narrow */
+@media (max-width:87.5rem){.intro{padding-bottom:14rem}}

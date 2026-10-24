@@ -2,8 +2,8 @@
   var root = document.documentElement;
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var copy = {
-    en: { t: "Sergio Atanacio · AI, automation and data engineer", d: "Junior AI, automation and data engineer in Lima, Peru, open to remote roles worldwide. Case studies of production systems: a tool-calling chat agent, evals, a role-based Next.js platform, a full-stack monitor and a coding-agent workflow.", open: "Open", close: "Close", copied: "Copied" },
-    es: { t: "Sergio Atanacio · Ingeniero de IA, automatización y datos", d: "Ingeniero junior de IA, automatización y datos en Lima, Perú, abierto a roles remotos internacionales. Casos de estudio de sistemas en producción: agente de chat con tool calling, evals, plataforma Next.js con roles, monitor full-stack y flujo con agentes de código.", open: "Abrir", close: "Cerrar", copied: "Copiado" }
+    en: { t: "Sergio Atanacio · AI & Data Engineer", d: "Junior AI & Data Engineer in Lima, Peru, open to remote roles worldwide. Case studies of production systems: an LLM agent with tool calling and evals, verified data, a role-based platform, a full-stack monitor and a coding-agent workflow.", open: "Open", close: "Close", copied: "Copied" },
+    es: { t: "Sergio Atanacio · Ingeniero de IA y datos", d: "Ingeniero junior de IA y datos en Lima, Perú, abierto a roles remotos internacionales. Casos de estudio de sistemas en producción: agente LLM con tool calling y evals, datos verificados, plataforma con roles, monitor full-stack y flujo con agentes de código.", open: "Abrir", close: "Cerrar", copied: "Copiado" }
   };
   var main = document.getElementById("main");
   var lang = "en";
